@@ -218,5 +218,27 @@ public class apkController  extends BaseController {
         return path;  
     }  
  
-
+    /*
+     * 功能说明：读取目录下的所有文件
+     * **/
+	@RequestMapping("/webPage/demo/GetFileList")
+    public @ResponseBody List<ApkMode> GetFileList(HttpServletRequest request) {
+		String strServerAPKPath =  request.getParameter("ServerAPKPath") ;
+    	File file = new File(strServerAPKPath);
+    	File[] fileList = file.listFiles();
+    	List<ApkMode> ReturnFileList = new ArrayList<ApkMode>();//返回值
+    	ApkMode objApkMode = new ApkMode();
+    	String FileName = "";
+    	for(int i=0;i<fileList.length;i++) {
+    		objApkMode = new ApkMode();
+    		FileName = fileList[i].getName();
+    		//只读加密文件和apk文件
+    		if(FileName.toUpperCase().indexOf(".JKS") !=-1 || FileName.toUpperCase().indexOf(".APK") != -1) {
+    			objApkMode.setFileName(FileName);
+    			ReturnFileList.add(objApkMode);
+    		}
+    	}
+    	return ReturnFileList;
+    }
+    
 }

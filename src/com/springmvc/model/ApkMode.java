@@ -18,7 +18,18 @@ public class ApkMode  extends BaseMode  implements Serializable{
 	private String keypass; // name
 
 	private String keyStorepass; // name 
+	
+	private String FileName;
   
+
+	
+	public String getFileName() {
+		return FileName;
+	}
+
+	public void setFileName(String fileName) {
+		FileName = fileName;
+	}
 
 	public String getServerapkpath() {
 		return serverapkpath;

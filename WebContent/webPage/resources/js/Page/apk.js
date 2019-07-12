@@ -14,17 +14,31 @@ $(function(){
 		Page.ajaxclick();
 		return false;
 	}); 
+	
+	$("#a_ReadFile").click(()=>{
+		Parmdata  = window.open(basePath+"/webPage/demo/"+"apkFile.jsp","windowopen",'width=800,height=700;location=no;'); 
+	});
 })  
 
 
 var Page = {
 	ajaxclick:  function() {   
 		var Parmdata ={};
-		Parmdata.serverapkpath = $("#ServerAPKPath").val();
-		Parmdata.apkpath = $("#APKPath")[0].files[0].name;
-		Parmdata.versions = $("#Versions").val();
+		Parmdata.serverapkpath = $("#ServerAPKPath").val(); 
+		if($("#APKPath")[0].files[0]==null ){
+			Parmdata.apkpath = $("#APKPathChild").val();
+		}else{
+			Parmdata.apkpath = $("#APKPath")[0].files[0].name;
+		}
 		
-		Parmdata.key0jks = $("#key0jks")[0].files[0].name;
+		Parmdata.versions = $("#Versions").val(); 
+		
+		if($("#key0jks")[0].files[0]==null ){
+			Parmdata.key0jks = $("#key0jksChild").val();
+		}else{
+			Parmdata.key0jks = $("#key0jks")[0].files[0].name;
+		}
+		
 		Parmdata.keyAlias = $("#keyAlias").val(); 
 		Parmdata.keypass = $("#keypass").val();
 		Parmdata.keyStorepass = $("#keyStorepass").val();
@@ -56,9 +70,13 @@ var Page = {
 			$("#newAppPath").val(data[1]);
 			alert("APK签名完成！");
 		}
+		 
+		if(action=="GetFileList"){
+			GetFileList(data);
+		}
 //		 $.each(data, function(index, element) { 
 //			   var value = element;
-//	       }); 
+//	       });
  	}
 }
 
@@ -72,4 +90,6 @@ function add(){
         total=0;
     }
 } 
+
+var Parmdata = {};
  
